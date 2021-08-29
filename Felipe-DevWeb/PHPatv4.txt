@@ -1,0 +1,19 @@
+Crie um código em PHP que dado um array $arr ordenar seus elementos em ordem
+decrescente.
+
+<?php
+
+$vet = array(35,70,1,9,6,25,12);
+$temp = 0;
+for ($i = 0; $i < 7; $i++) {
+    for ($j = 0; $j < $i; $j++) {
+        if ($vet[$i] > $vet[$j]) {
+            $temp = $vet[$i];
+            $vet[$i] = $vet[$j];
+            $vet[$j] = $temp;
+        }
+    }
+}
+for ($i = 0; $i < 7; $i++){
+	echo $vet[$i]," - ";
+}
