@@ -72,9 +72,6 @@ public class Contato implements Serializable {
 
     @Override
     public String toString() {
-        return "Contato{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return id +"  -  "+ nome;
     }
 }

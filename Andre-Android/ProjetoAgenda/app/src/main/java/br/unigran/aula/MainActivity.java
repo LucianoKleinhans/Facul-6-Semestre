@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AndroidException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -68,8 +67,19 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(Intent.ACTION_PICK);
         it.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
         startActivityForResult(it, 150, null);
-
     }
+
+/*    public void importarContato(View view){
+        //tentei fazer com um vetor de INTENT porem fica criando multiplos contatos.
+        Intent[] it = new Intent[2];
+        it[0] = new Intent(Intent.ACTION_PICK);
+        it[1] = new Intent(Intent.ACTION_PICK);
+        it[0].setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        it[1].setType(ContactsContract.CommonDataKinds.Email.CONTENT_TYPE);
+        startActivityForResult(it[0], 150, null);
+        startActivityForResult(it[1], 151, null);
+    }*/
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -83,26 +93,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Saiu", Toast.LENGTH_SHORT).show();
             }
         }
-        if (requestCode == 150 && resultCode==RESULT_OK) {
+        if (requestCode == 150 && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             String[] projecao =
                     {
-//                            ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
+                            //ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
                             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                            ContactsContract.CommonDataKinds.Phone.NUMBER,
-//                            ContactsContract.CommonDataKinds.Phone.
-//                            ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS
+                            ContactsContract.CommonDataKinds.Phone.NUMBER
+                            //ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS
                     };
             Cursor cursor = getContentResolver().query(uri, projecao, null, null, null);
-            if (cursor != null && cursor.moveToFirst()){
+            if (cursor != null && cursor.moveToFirst()) {
                 Contato contato = new Contato();
-                //contato.setImagem(cursor.);
                 contato.setNome(cursor.getString(0));
                 contato.setNumTelefone(cursor.getString(1));
-//                contato.setEmailContato(cursor.getString(2));
-//                contato.setEnderecoContato(cursor.getString(3));
                 Dados.salvar(contato);
                 atualiza();
+            }
+            if (resultCode == RESULT_OK) {
+                atualiza();
+                Toast.makeText(this, "Contato Importado ", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Saiu", Toast.LENGTH_SHORT).show();
             }
         }
     }

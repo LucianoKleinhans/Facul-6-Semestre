@@ -51,7 +51,6 @@ public class Segunda extends AppCompatActivity {
     }
     public void cancelar(View view){
         setResult(RESULT_CANCELED);
-        //finish();
         onBackPressed();
     }
     public void salvar(View view){
