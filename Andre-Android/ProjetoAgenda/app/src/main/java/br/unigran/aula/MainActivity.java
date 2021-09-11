@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
     }
 
-    public void novoProduto(View view) {
+    public void novoContato(View view) {
         Intent it = new Intent(this, Segunda.class);
         startActivityForResult(it, 201, null);
     }
 
     public void importarContato(View view){
         Intent it = new Intent(Intent.ACTION_PICK);
-        it.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        it.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
         startActivityForResult(it, 150, null);
 
     }
@@ -83,23 +83,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Saiu", Toast.LENGTH_SHORT).show();
             }
         }
-        if (requestCode == 150) {
-            if (resultCode == RESULT_OK) {
-                final String[] PROJECTION =
-                        {
-//                                ContactsContract.CommonDataKinds.Photo.PHOTO,
-                                ContactsContract.CommonDataKinds.Identity.DISPLAY_NAME,
-//                                ContactsContract.CommonDataKinds.Phone.NUMBER,
-//                                ContactsContract.CommonDataKinds.Email.ADDRESS,
-//                                ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS
-                        };
-                Uri agenda = ContactsContract.Contacts.CONTENT_URI;
-                Cursor cursor = getContentResolver().query(agenda,PROJECTION,null,null);
-                //Dados.salvar(cursor);
-                Toast.makeText(this, "Salvo ", Toast.LENGTH_SHORT).show();
+        if (requestCode == 150 && resultCode==RESULT_OK) {
+            Uri uri = data.getData();
+            String[] projecao =
+                    {
+//                            ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
+                            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                            ContactsContract.CommonDataKinds.Phone.NUMBER,
+//                            ContactsContract.CommonDataKinds.Phone.
+//                            ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS
+                    };
+            Cursor cursor = getContentResolver().query(uri, projecao, null, null, null);
+            if (cursor != null && cursor.moveToFirst()){
+                Contato contato = new Contato();
+                //contato.setImagem(cursor.);
+                contato.setNome(cursor.getString(0));
+                contato.setNumTelefone(cursor.getString(1));
+//                contato.setEmailContato(cursor.getString(2));
+//                contato.setEnderecoContato(cursor.getString(3));
+                Dados.salvar(contato);
                 atualiza();
-            } else {
-                Toast.makeText(this, "Saiu", Toast.LENGTH_SHORT).show();
             }
         }
     }

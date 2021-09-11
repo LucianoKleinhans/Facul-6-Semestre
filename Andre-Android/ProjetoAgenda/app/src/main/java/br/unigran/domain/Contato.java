@@ -69,4 +69,12 @@ public class Contato implements Serializable {
         Contato contato = (Contato) o;
         return Objects.equals(id, contato.id);
     }
+
+    @Override
+    public String toString() {
+        return "Contato{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 }

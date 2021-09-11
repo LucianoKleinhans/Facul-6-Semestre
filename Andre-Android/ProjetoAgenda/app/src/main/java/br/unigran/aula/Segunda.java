@@ -36,8 +36,6 @@ public class Segunda extends AppCompatActivity {
         foto=findViewById(R.id.imagem);
         Intent it = getIntent();
 
-    // falta mexer aqui o \/
-
         if(it.getSerializableExtra("Contato")!=null){
             contato = (Contato) it.getSerializableExtra("Contato");
             nomeCont.setText(contato.getNome());
@@ -65,7 +63,6 @@ public class Segunda extends AppCompatActivity {
         Dados.salvar(contato);
         setResult(RESULT_OK);
         finish();
-        //onBackPressed();
     }
 
     public void capturaImg(View view){
