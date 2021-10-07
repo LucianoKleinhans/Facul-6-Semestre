@@ -1,18 +1,15 @@
 <?php
 session_start();
+$i=0;
+function logoutq($i){
+    
+    if($i != 0){
+        session_destroy();
+        header('Location: login.php');
+    }
+    
+}
 ?>
-<style>
-.form{
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    color: black;
-    padding-left: 20%;
-    padding-right: 20%;
-}
-.text{
-    color: blue;
-}
-</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +21,11 @@ session_start();
 </head>
 <body>
 <div class="container center">
-    <h1>asddasdasd</h1>
-    <!-- <a class="waves-effect waves-light btn" action="<?php session_destroy(); header('Location: login.php'); ?>">LOGOUT</a> -->
+    <h1>OLÁ</h1>
+    <button class="waves-effect waves-light btn" onclick="<?php $i=1;logoutq($i);?>" >LOGOUT</button>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
+<?php
+
+?>

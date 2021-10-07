@@ -1,9 +1,4 @@
-<?php
-session_start();
 
-    // $_SESSION["user"]=$_REQUEST['user'];
-    // $_SESSION["senha"]=$_REQUEST['senha'];
-?>
 <style>
 .form{
     background-color: #d9d9d9;
@@ -35,22 +30,30 @@ session_start();
                 <br>
                 Senha: <input type="password" name="senha">
                 <br>
-                <button id="btSubmit" class="waves-effect waves-light btn" type="submit"> <?php
-
-                    $_SESSION["user"]=$_REQUEST['user'];
-                    $_SESSION["senha"]=$_REQUEST['senha'];
-                if (isset($_SESSION['user'])&&($_SESSION['senha'])) {   
-                    header('Location: logout.php');
-                    // echo "USER : " . $_SESSION["user"]."<br>";
-                    // echo "SENHA : " . $_SESSION["senha"]."<br>";
-                } else {
-                     echo "Sua sessão está fechada!<br>";
-                }
-            ?>ENVIAR</button>
+                <button id="btSubmit" class="waves-effect waves-light btn" type="submit" onclick="<?php login(); ?>"
+                >ENVIAR</button>
                 <br><br>
             </form>
         </div>
+        <?php echo $_SESSION["usuario"];?>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
+<?php
+
+function login(){
+    session_start();
+    if (isset($_SESSION['usuario'])&&($_SESSION['password'])) {   
+        header('Location: logout.php');    
+    }else{
+        $_SESSION["usuario"]=$_REQUEST['user'];
+        $_SESSION["password"]=$_REQUEST['senha'];
+    }if (isset($_SESSION['usuario'])&&($_SESSION['password'])) {   
+        header('Location: logout.php');    
+    }
+}
+    // $_SESSION["user"]=$_REQUEST['user'];
+    // $_SESSION["senha"]=$_REQUEST['senha'];
+?>
 
 
