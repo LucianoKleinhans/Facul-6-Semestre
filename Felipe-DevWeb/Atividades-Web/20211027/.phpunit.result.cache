@@ -1,0 +1,1 @@
+{"version":1,"defects":{"ProdutoTest::testGetDescricao":3,"ProdutoTest::testGetCodProd":3,"ProdutoTest::testRead":4,"ProdutoTest::testGetValorUni":3},"times":{"ProdutoTest::testGetDescricao":0.011,"ProdutoTest::testGetCodProd":0.01,"ProdutoTest::testRead":0.002,"ProdutoTest::testGetValorUni":0.012}}

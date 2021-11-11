@@ -1,0 +1,1 @@
+{"version":1,"defects":{"CidadeTest::testGetNomeCid":4,"CidadeTest::testRead":4,"CidadeTest::testGetCodCid":4},"times":{"CidadeTest::testGetNomeCid":0.022,"CidadeTest::testGetCodCid":0.001,"CidadeTest::testRead":0.012}}
